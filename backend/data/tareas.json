@@ -1,20 +1,26 @@
 [
-    {
-        "id": "e76a70ad-bc97-4037-bf49-dc091d6644f2",
-        "titulo": "Repasar JS",
-        "estado": "terminada",
-        "fecha": "2025-03-16T00:01:52.756Z"
-    },
-    {
-        "id": "e76a70ad-bc97-4037-bf49-dc091d2224f2",
-        "titulo": "Armar aplicación de Tareas",
-        "estado": "en progreso",
-        "fecha": "2025-03-17T10:01:52.756Z"
-    },
-    {
-        "id": "e76a70ad-bc97-4037-bf49-dc091d4444f2",
-        "titulo": "Comprobar Funcionalidad de la App",
-        "estado": "pendiente",
-        "fecha": "2023-03-18T05:20:52.756Z"
-    }
+   {
+      "id": "e76a70ad-bc97-4037-bf49-dc091d6644f2",
+      "titulo": "Repasar JS",
+      "estado": "terminada",
+      "fecha": "2025-03-16"
+   },
+   {
+      "id": "e76a70ad-bc97-4037-bf49-dc091d2224f2",
+      "titulo": "Armar aplicación de Tareas",
+      "estado": "en progreso",
+      "fecha": "2025-03-17"
+   },
+   {
+      "id": "e76a70ad-bc97-4037-bf49-dc091d4444f2",
+      "titulo": "Comprobar Funcionalidad de la App",
+      "estado": "pendiente",
+      "fecha": "2025-03-18"
+   },
+   {
+      "id": "cd6afb49-a787-4051-881d-6183e107107a",
+      "titulo": "Realizar prueba de Creacion",
+      "estado": "pendiente",
+      "fecha": "2025-03-19"
+   }
 ]
