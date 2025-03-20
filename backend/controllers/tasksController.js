@@ -1,4 +1,3 @@
-const { unlinkSync, existsSync } = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
 const { readJSON, writeJSON } = require("../data");
@@ -6,58 +5,92 @@ const { readJSON, writeJSON } = require("../data");
 module.exports = {
 
   list: function (req, res) {
-    const products = readJSON("tareas.json");
+    const tasks = readJSON();
     res.status(200).json({
       ok: true,
       msg: "Listado de Tareas",
-      data: products
+      data: tasks
     });
   },
 
   create: function (req, res) {
-    const products = readJSON("tareas.json");
+    const tasks = readJSON();
 
-    products.push({
+    tasks.push({
       id: uuidv4(),
-      titulo: req.body.titulo,
+      titulo: req.body.titulo.trim(),  
       estado: "pendiente",
       fecha: new Date().toISOString().split('T')[0]
     });
 
-    writeJSON(products, "tareas.json");
+    writeJSON(tasks);
 
     res.status(200).json({
       ok: true,
       msg: "Se ha añadido la tarea a la lista",
-      data: products
+      data: tasks
     });
   },
 
   detail: function (req, res) {
+    const tasks = readJSON();
+		const task = tasks.find(task => task.id === req.params.id);
+
     res.status(200).json({
       ok: true,
-      msg: "Datalle de la Tarea"
+      msg: "Datalle de la Tarea",
+      data: task
     });
   },
 
   update: function (req, res) {
+    const tasks = readJSON();
+
+    const taskModify = tasks.map(task =>{
+      if (task.id === req.params.id){
+       task.titulo = req.body.titulo.trim(), 
+        task.estado = "pendiente",
+        task.fecha = new Date().toISOString().split('T')[0]
+    }
+  });
+    writeJSON(taskModify);
+
     res.status(200).json({
       ok: true,
-      msg: "Se ha actualizado la tarea"
-    });
+      msg: "Se ha actualizado la tarea",
+      data: taskModify
+  })
   },
 
   remove: function (req, res) {
+    const tasks = readJSON();
+
+    const tasksModify = tasks.filter(task => task.id !== req.params.id )
+
+    writeJSON(tasksModify);
+
     res.status(200).json({
       ok: true,
-      msg: "Tarea eliminada de la lista"
+      msg: "Tarea eliminada de la lista",
+      data: tasksModify
     });
   },
 
   changeState: function (req, res, next) {
+    const tasks = readJSON();
+
+    const taskStatus = tasks.map(task =>{
+      if (task.id === req.params.id){ 
+        task.estado = req.body.estado
+    }	
+  })  
+  
+  writeJSON(taskStatus);
+
     res.status(200).json({
       ok: true,
-      msg: "Se ha actualizado el estado de la tarea"
+      msg: "Se ha actualizado el estado de la tarea",
+      data:taskStatus
     });
   },
 } 
