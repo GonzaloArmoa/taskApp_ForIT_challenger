@@ -1,30 +1,37 @@
 [
    {
       "id": "e76a70ad-bc97-4037-bf49-dc091d6644f2",
-      "titulo": "Repasar JS",
-      "estado": "terminada",
-      "fecha": "2025-03-16",
-      "vencimiento": "2028-03-05"
+      "titulo": "Repasar JavaScript",
+      "estado": "pendiente",
+      "fecha": "2025-03-23",
+      "fechaVencimiento": "2027-12-30"
    },
    {
       "id": "e76a70ad-bc97-4037-bf49-dc091d2224f2",
       "titulo": "Armar aplicación de Tareas",
       "estado": "en progreso",
       "fecha": "2025-03-17",
-      "vencimiento": "2025-09-25"
+      "fechaVencimiento": "2025-09-25"
    },
    {
       "id": "e76a70ad-bc97-4037-bf49-dc091d4444f2",
       "titulo": "Comprobar Funcionalidad de la App",
       "estado": "pendiente",
       "fecha": "2025-03-18",
-      "vencimiento": "2025-06-12"
+      "fechaVencimiento": "2025-06-12"
    },
    {
       "id": "cd6afb49-a787-4051-881d-6183e107107a",
       "titulo": "Realizar prueba de Creacion",
       "estado": "pendiente",
       "fecha": "2025-03-19",
-      "vencimiento": "2027-12-30"
+      "fechaVencimiento": "2027-12-30"
+   },
+   {
+      "id": "4b162437-5910-40ec-91c9-e2fd56b09255",
+      "titulo": "Pruebas de Creaccion Correctas",
+      "estado": "completada",
+      "fecha": "2025-03-23",
+      "fechaVencimiento": "2027-12-30"
    }
 ]

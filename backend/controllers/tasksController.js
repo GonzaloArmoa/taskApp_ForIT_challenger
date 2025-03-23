@@ -28,7 +28,7 @@ module.exports = {
   create: function (req, res) {
 
     try {
-      const { titulo, vencimiento } = req.body;
+      const { titulo, fechaVencimiento } = req.body;
 
       // Validación   
 
@@ -40,8 +40,8 @@ module.exports = {
       }
 
     // Validación   
-    if (vencimiento) {
-      const vencimientoDate = new Date(vencimiento);
+    if (fechaVencimiento) {
+      const vencimientoDate = new Date(fechaVencimiento);
       const today = new Date();
 
       if (isNaN(vencimientoDate)) {
@@ -118,7 +118,7 @@ module.exports = {
   update: function (req, res) {
 
     try {
-      const { titulo, vencimiento } = req.body;
+      const { titulo, fechaVencimiento } = req.body;
 
       // Validación
       if (!titulo || titulo.trim() === "") {
@@ -129,8 +129,8 @@ module.exports = {
       }
 
        // Validación
-       if (vencimiento) {
-        const vencimientoDate = new Date(vencimiento);
+       if (fechaVencimiento) {
+        const vencimientoDate = new Date(fechaVencimiento);
         const today = new Date();
   
         if (isNaN(vencimientoDate)) {
