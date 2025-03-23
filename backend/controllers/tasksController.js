@@ -46,19 +46,18 @@ module.exports = {
   update: function (req, res) {
     const tasks = readJSON();
 
-    const taskModify = tasks.map(task =>{
-      if (task.id === req.params.id){
-       task.titulo = req.body.titulo.trim(), 
-        task.estado = "pendiente",
-        task.fecha = new Date().toISOString().split('T')[0]
-    }
-  });
-    writeJSON(taskModify);
+    const task = tasks.find(task => task.id === req.params.id);
+
+       task.titulo = req.body.titulo.trim();
+        task.estado = "pendiente";
+        task.fecha = new Date().toISOString().split('T')[0];
+    
+    writeJSON(tasks);
 
     res.status(200).json({
       ok: true,
       msg: "Se ha actualizado la tarea",
-      data: taskModify
+      data: task
   })
   },
 
@@ -79,18 +78,17 @@ module.exports = {
   changeState: function (req, res, next) {
     const tasks = readJSON();
 
-    const taskStatus = tasks.map(task =>{
-      if (task.id === req.params.id){ 
-        task.estado = req.body.estado
-    }	
-  })  
+    const task = tasks.find(task => task.id === req.params.id);
+
+    task.estado = req.body.estado;
+
   
-  writeJSON(taskStatus);
+  writeJSON(tasks);
 
     res.status(200).json({
       ok: true,
       msg: "Se ha actualizado el estado de la tarea",
-      data:taskStatus
+      data:task
     });
   },
 } 
