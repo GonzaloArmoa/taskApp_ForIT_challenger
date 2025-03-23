@@ -28,9 +28,10 @@ module.exports = {
   create: function (req, res) {
 
     try {
+      const { titulo, vencimiento } = req.body;
 
-      // Validación
-      const { titulo } = req.body;
+      // Validación   
+
       if (!titulo || titulo.trim() === "") {
         return res.status(400).json({
           ok: false,
@@ -38,13 +39,34 @@ module.exports = {
         });
       }
 
+    // Validación   
+    if (vencimiento) {
+      const vencimientoDate = new Date(vencimiento);
+      const today = new Date();
+
+      if (isNaN(vencimientoDate)) {
+        return res.status(400).json({
+          ok: false,
+          msg: "La fecha de vencimiento es obligatoria"
+        });
+      }
+
+      if (vencimientoDate < today) {
+        return res.status(400).json({
+          ok: false,
+          msg: "La fecha de vencimiento no puede estar en el pasado"
+        });
+      }
+  }
+
       const tasks = readJSON();
 
       tasks.push({
         id: uuidv4(),
         titulo: titulo.trim(),
         estado: "pendiente",
-        fecha: new Date().toISOString().split('T')[0]
+        fecha: new Date().toISOString().split('T')[0],
+        fechaVencimiento: new Date(fechaVencimiento).toISOString().split('T')[0]
       });
 
       writeJSON(tasks);
@@ -96,7 +118,7 @@ module.exports = {
   update: function (req, res) {
 
     try {
-      const { titulo } = req.body;
+      const { titulo, vencimiento } = req.body;
 
       // Validación
       if (!titulo || titulo.trim() === "") {
@@ -105,6 +127,26 @@ module.exports = {
           msg: "El título es obligatorio"
         });
       }
+
+       // Validación
+       if (vencimiento) {
+        const vencimientoDate = new Date(vencimiento);
+        const today = new Date();
+  
+        if (isNaN(vencimientoDate)) {
+          return res.status(400).json({
+            ok: false,
+            msg: "La fecha de vencimiento es obligatoria"
+          });
+        }
+  
+        if (vencimientoDate < today) {
+          return res.status(400).json({
+            ok: false,
+            msg: "La fecha de vencimiento no puede estar en el pasado"
+          });
+        }
+    }
 
       const tasks = readJSON();
       const task = tasks.find(task => task.id === req.params.id);
@@ -120,6 +162,9 @@ module.exports = {
       task.titulo = titulo.trim();
       task.estado = "pendiente";
       task.fecha = new Date().toISOString().split('T')[0];
+      if (fechaVencimiento) {
+        task.fechaVencimiento = new Date(fechaVencimiento).toISOString().split('T')[0];
+      }
 
       writeJSON(tasks);
 
@@ -204,7 +249,7 @@ module.exports = {
         msg: "Se ha actualizado el estado de la tarea",
         data: task
       });
-      
+
     } catch (error) {
       res.status(500).json({
         ok: false,
