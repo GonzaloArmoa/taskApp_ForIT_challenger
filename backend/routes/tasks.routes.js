@@ -16,6 +16,6 @@ router
         .put(update) 
         .delete(remove) 
 router 
-    .post('/change-state/:id', changeState) 
+    .put('/change-state/:id', changeState) 
  
 module.exports = router;

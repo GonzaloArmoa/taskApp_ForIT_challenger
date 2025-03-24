@@ -8,7 +8,7 @@ export const TaskList = () => {
   const fetchTasks = async () => {
 
     try {
-      const response = await fetch('http://localhost:3000/tasks');
+      const response = await fetch('http://localhost:3000/api/tasks');
       const data = await response.json();
       setTasks(data.data);
 
@@ -22,7 +22,7 @@ export const TaskList = () => {
 
   const handleDeleteTask = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
         method: 'DELETE',
       });
 

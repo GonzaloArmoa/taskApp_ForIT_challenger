@@ -10,12 +10,14 @@ const TaskDetail = () => {
   const [fechaVencimiento, setFechaVencimiento] = useState('');
   const [estado, setEstado] = useState('pendiente');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null)
 
 
   //VISUALIZAR EL DETALLE DE LA TAREA
   const fetchTaskDetail = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`);
+      const response = await fetch(`http://localhost:3000/api/tasks/${id}`);
       const data = await response.json();
 
       if (data.ok) {
@@ -32,6 +34,9 @@ const TaskDetail = () => {
 
     } catch (error) {
       setMessage('Error al obtener los detalles de la tarea');
+
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,7 +55,7 @@ const TaskDetail = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -63,13 +68,13 @@ const TaskDetail = () => {
       });
 
       const data = await response.json();
-
+   
       if (data.ok) {
-        setMessage('Tarea actualizada exitosamente');
-        setTimeout(() => navigate('/'), 2000);
+        alert("Tarea actualizada correctamente.");
+        navigate("/"); 
 
       } else {
-        setMessage(data.msg);
+        alert("Error al actualizar la tarea.");
       }
 
     } catch (error) {
@@ -77,40 +82,84 @@ const TaskDetail = () => {
     }
   };
 
-  if (!task) return <div>Loading...</div>;
+  //MODIFICAR EL ESTADO DE LA TAREA
+  const handleStateChange = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/tasks/change-state/${id}`, {
+        method: 'PUT', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ estado }), 
+      });
+
+      const data = await response.json();
+
+      if (data.ok) {
+        alert("Estado actualizado correctamente.");
+        navigate("/"); 
+
+      } else {
+        alert("Error al actualizar el estado de la tarea.");
+      }
+
+    } catch (err) {
+      setError("Hubo un error al actualizar el estado.");
+    }
+  };
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
 
   return (
     <div>
-      <h2>Detalle de la Tarea</h2>
-      <p><strong>Título:</strong> {task.titulo}</p>
-      <p><strong>Fecha de Vencimiento:</strong> {task.fechaVencimiento}</p>
-      <p><strong>Estado:</strong> {task.estado}</p>
+    <h2>Detalle de la Tarea</h2>
+    <p><strong>Título:</strong> {task.titulo}</p>
+    <p><strong>Fecha de Vencimiento:</strong> {task.fechaVencimiento}</p>
+    <p><strong>Estado:</strong> {task.estado}</p>
 
-      <h3>Modificar Tarea</h3>
-      <form onSubmit={handleUpdateTask}>
-        <input
-          type="text"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-          placeholder="Nuevo título"
-          required
-        />
-        <input
-          type="date"
-          value={fechaVencimiento}
-          onChange={(e) => setFechaVencimiento(e.target.value)}
-        />
-        <select value={estado} onChange={(e) => setEstado(e.target.value)}>
-          <option value="pendiente">Pendiente</option>
-          <option value="en progreso">En progreso</option>
-          <option value="completada">Completada</option>
-        </select>
-        <button type="submit">Actualizar Tarea</button>
-      </form>
+    <h3>Modificar Tarea</h3>
+    <form onSubmit={handleUpdateTask}>
+      <input
+        type="text"
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
+        placeholder="Nuevo título"
+        required
+      />
+      <input
+        type="date"
+        value={fechaVencimiento}
+        onChange={(e) => setFechaVencimiento(e.target.value)}
+      />
+      <button type="submit">Actualizar Tarea</button>
+    </form>
 
-      {message && <p>{message}</p>}
-    </div>
-  );
+    <h3>Cambiar Estado de la Tarea</h3>
+    <form onSubmit={handleStateChange}>
+      <label htmlFor="estado">Nuevo Estado:</label>
+      <select
+        id="estado"
+        value={estado}
+        onChange={(e) => setEstado(e.target.value)}
+      >
+        <option value="pendiente">Pendiente</option>
+        <option value="en progreso">En Progreso</option>
+        <option value="completada">Completada</option>
+      </select>
+      <button type="submit">Actualizar Estado</button>
+    </form>
+
+  </div>
+);
 };
 
 export default TaskDetail;

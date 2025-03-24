@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-export const CreateTask = () => {
+export const TaskCreate = () => {
   const [titulo, setTitulo] = useState('');
   const [fechaVencimiento, setFechaVencimiento] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleCreateTask = async (e) => {
+  const handleTaskCreate = async (e) => {
     e.preventDefault();
 
     if (!titulo) {
@@ -14,7 +14,7 @@ export const CreateTask = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/tasks', {
+      const response = await fetch('http://localhost:3000/api/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const CreateTask = () => {
       } else {
         setMessage(data.msg);
       }
-      
+
     } catch (error) {
       setMessage('Error al crear la tarea');
     }
@@ -44,7 +44,7 @@ export const CreateTask = () => {
   return (
     <div>
       <h2>Crear Tarea</h2>
-      <form onSubmit={handleCreateTask}>
+      <form onSubmit={handleTaskCreate}>
         <input
           type="text"
           value={titulo}
