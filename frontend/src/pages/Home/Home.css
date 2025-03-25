@@ -1,0 +1,11 @@
+.home-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;        
+    gap: 50px;                    
+    padding: 20px;
+
+  }
+
+  

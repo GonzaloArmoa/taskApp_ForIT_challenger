@@ -1,6 +1,6 @@
 
 export const Footer = () => {
   return (
-    <div>Footer</div>
+    <div>Presentacion de Challenger para ForIT</div>
   )
 }

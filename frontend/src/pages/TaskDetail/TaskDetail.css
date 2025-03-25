@@ -1,0 +1,87 @@
+.task-detail-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: linear-gradient(145deg, #1a1a1a, #333333);
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 255, 204, 0.2);
+  }
+  
+  .task-detail-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #00ffcc;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  .task-detail-container p {
+    font-size: 1.1rem;
+    color: #ccc;
+  }
+  
+  .task-detail-container form {
+    margin-top: 20px;
+  }
+  
+  .task-detail-container input,
+  .task-detail-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #282828;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+  }
+  
+  .task-detail-container input:focus,
+  .task-detail-container select:focus {
+    border-color: #00ffcc;
+  }
+  
+  .task-detail-container button {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .task-detail-container button:hover {
+    background-color: #00b399;
+    color: #000;
+  }
+  
+  .task-detail-container .error-message {
+    color: #ff3333;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .back-button {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 50px;
+  }
+  
+  .back-button:hover {
+    background-color: #00b399;
+    color: #000;
+  }

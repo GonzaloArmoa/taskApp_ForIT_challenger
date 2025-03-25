@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import "./TaskDetail.css"
 
 const TaskDetail = () => {
   const { id } = useParams(); 
@@ -70,11 +71,13 @@ const TaskDetail = () => {
       const data = await response.json();
    
       if (data.ok) {
-        alert("Tarea actualizada correctamente.");
-        navigate("/"); 
+        setMessage('Tarea actualizada correctamente');
+        setTimeout(() => {
+          navigate('/'); 
+        }, 2000);
 
       } else {
-        alert("Error al actualizar la tarea.");
+        setMessage("Error al actualizar la tarea.");
       }
 
     } catch (error) {
@@ -98,11 +101,13 @@ const TaskDetail = () => {
       const data = await response.json();
 
       if (data.ok) {
-        alert("Estado actualizado correctamente.");
-        navigate("/"); 
+        setMessage('Estado actualizado correctamente');
+        setTimeout(() => {
+          navigate('/'); 
+        }, 2000);; 
 
       } else {
-        alert("Error al actualizar el estado de la tarea.");
+        setMessage("Error al actualizar el estado de la tarea.");
       }
 
     } catch (err) {
@@ -120,11 +125,11 @@ const TaskDetail = () => {
 
 
   return (
-    <div>
+    <div className="task-detail-container">
     <h2>Detalle de la Tarea</h2>
-    <p><strong>Título:</strong> {task.titulo}</p>
-    <p><strong>Fecha de Vencimiento:</strong> {task.fechaVencimiento}</p>
-    <p><strong>Estado:</strong> {task.estado}</p>
+    <p><strong>Título:</strong> {task?.titulo}</p>
+    <p><strong>Fecha de Vencimiento:</strong> {task?.fechaVencimiento}</p>
+    <p><strong>Estado:</strong> {task?.estado}</p>
 
     <h3>Modificar Tarea</h3>
     <form onSubmit={handleUpdateTask}>
@@ -157,6 +162,12 @@ const TaskDetail = () => {
       </select>
       <button type="submit">Actualizar Estado</button>
     </form>
+
+    {message && <div className="error-message">{message}</div>}
+
+    <button onClick={() => navigate('/')} className="back-button">
+        Volver a la Lista de Tareas
+      </button>
 
   </div>
 );

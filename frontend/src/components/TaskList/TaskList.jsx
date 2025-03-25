@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import "./TaskList.css";
 
 export const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -43,20 +44,31 @@ export const TaskList = () => {
     fetchTasks();
   }, []);
 
+
+  const handleNewTask = (newTask) => {
+    setTasks((prevTasks) => [...prevTasks, newTask]); 
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h2>Lista de Tareas</h2>
-      <ul>
+    <div className="task-list-container">
+      <h2 className="title">Lista de Tareas</h2>
+      <ul className="task-list">
         {tasks.map((task) => (
-          <li key={task.id}>
-            {task.titulo} - {task.estado}
-            <Link to={`/task/${task.id}`}>Ver Detalle</Link>
-            <button onClick={() => handleDeleteTask(task.id)}>Eliminar</button>
+          <li key={task.id} className="task-card">
+            <div className="task-header">
+              <h3>{task.titulo}</h3>
+              <span className={`task-status ${task.estado.toLowerCase()}`}>{task.estado}</span>
+            </div>
+            <div className="task-actions">
+              <Link to={`/task/${task.id}`} className="task-detail-btn">Ver Detalle</Link>
+              <button onClick={() => handleDeleteTask(task.id)} className="task-delete-btn">Eliminar</button>
+            </div>
           </li>
         ))}
       </ul>
     </div>
+
   );
 };

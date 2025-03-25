@@ -1,16 +1,16 @@
 [
    {
       "id": "e76a70ad-bc97-4037-bf49-dc091d6644f2",
-      "titulo": "Repasar JavaScript",
-      "estado": "en progreso",
-      "fecha": "2025-03-24",
+      "titulo": "Repasar JavaScript 222",
+      "estado": "completada",
+      "fecha": "2025-03-25",
       "fechaVencimiento": "2028-01-30"
    },
    {
       "id": "e76a70ad-bc97-4037-bf49-dc091d2224f2",
-      "titulo": "Armar aplicación de Tareas",
+      "titulo": "Armar aplicación de Tareas 2",
       "estado": "pendiente",
-      "fecha": "2025-03-23",
+      "fecha": "2025-03-25",
       "fechaVencimiento": "2025-09-25"
    },
    {
@@ -23,14 +23,7 @@
    {
       "id": "cd6afb49-a787-4051-881d-6183e107107a",
       "titulo": "Realizar prueba de Creacion",
-      "estado": "pendiente",
-      "fecha": "2025-03-23",
-      "fechaVencimiento": "2027-12-30"
-   },
-   {
-      "id": "4b162437-5910-40ec-91c9-e2fd56b09255",
-      "titulo": "nuevo titulo",
-      "estado": "completada",
+      "estado": "en progreso",
       "fecha": "2025-03-23",
       "fechaVencimiento": "2027-12-30"
    }
